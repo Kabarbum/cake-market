@@ -8,9 +8,11 @@ const MyMenu = ({isMenuVisible, setMenuVisible}) => {
         <div className='menu' onClick={()=>setMenuVisible(false)}>
             <ul>
                 <li><Link to="">Каталог</Link></li>
+                <li><Link to="/fillings">Начинки</Link></li>
                 <li><Link to="/order">Как Заказать</Link></li>
-                <li><a href="">Вконтакте</a></li>
-                <li><a href="">Инстаграм</a></li>
+
+                <li><a href="https://vk.com/karamel_zlat">Вконтакте</a></li>
+                <li><a href="https://www.instagram.com/e.a.cherem/">Инстаграм</a></li>
             </ul>
         </div>
     );

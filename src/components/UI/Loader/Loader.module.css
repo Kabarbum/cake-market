@@ -1,0 +1,21 @@
+.loader{
+    width: 126px;
+    height: 126px;
+    margin: 0 auto;
+    border: 7px dotted #fff;
+    border-radius: 50%;
+    animation: loading 2s ease infinite;
+}
+@keyframes loading {
+    0%{
+        transform: scale(1) rotate(0);
+    }
+    50%{
+        transform: scale(0.7) rotate(360deg);
+    }
+    100%{
+        transform: scale(1) rotate(0deg);
+
+    }
+
+}

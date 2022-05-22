@@ -19,7 +19,8 @@ const Navbar = () => {
             <nav>
                 <span className="logo">
                     <Link to="">
-                        <nobr>Для десерта</nobr> <nobr>не нужен повод</nobr></Link>
+                        <nobr>Для десерта</nobr> <nobr>не нужен повод</nobr>
+                    </Link>
                 </span>
                 <ul className="big-menu">
 
@@ -30,7 +31,7 @@ const Navbar = () => {
                         <NavLink to="/fillings">Начинки</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/order">Как заказать</NavLink>
+                        <NavLink to="/order"><nobr>Как заказать</nobr></NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/admin">Д</NavLink>

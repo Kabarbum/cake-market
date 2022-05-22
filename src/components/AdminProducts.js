@@ -1,16 +1,24 @@
 import React, {useEffect} from 'react';
-import ProductItem from "./ProductItem";
-import Loader from "./UI/Loader/Loader"
+import AdminProductsForm from "./AdminProductsForm";
+import Loader from "./UI/Loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMoreProducts} from "../firebase/requests";
 import {
     fetchMoreProductsAction,
     setLastVisibleAction,
     setProductLoadingAction,
     setProductsExistsAction
 } from "../store/reducers/products";
+import {fetchMoreProducts} from "../firebase/requests";
+import AdminProductItem from "./AdminProductItem";
+import {
+    setProductCategoryIdAction, setProductChangingAction,
+    setProductDescriptionAction, setProductUrlAction, setProductIdAction,
+    setProductPriceAction,
+    setProductTitleAction,
+    setProductWeightAction, setPrevProductUrlAction
+} from "../store/reducers/admin";
 
-const Products = () => {
+const AdminProducts = ({initProducts}) => {
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.products)
     const isProductPreLoading = useSelector(state => state.products.isProductPreLoading)
@@ -25,9 +33,8 @@ const Products = () => {
     const observer = React.useRef()
     const lastElem = React.useRef()
 
-
     const fetchMore = async () => {
-        if(!isProductsExists) return
+        if (!isProductsExists) return
         dispatch(setProductLoadingAction(true))
 
         const products = await fetchMoreProducts(selectedCategoryId, selectedSort, limit, lastVisible)
@@ -54,27 +61,45 @@ const Products = () => {
         observer.current.observe(lastElem.current)
 
     }, [isProductPreLoading, isProductLoading])
+
+    const setItem = (product) => {
+        dispatch(setProductChangingAction(true))
+        dispatch(setProductIdAction(product.id))
+        dispatch(setProductTitleAction(product.title))
+        dispatch(setProductDescriptionAction(product.description))
+        dispatch(setProductPriceAction(product.price))
+        dispatch(setProductWeightAction(product.weight))
+        dispatch(setProductCategoryIdAction(product.categoryId))
+        dispatch(setProductUrlAction(product.imgUrl))
+        dispatch(setPrevProductUrlAction(product.imgUrl))
+    }
     return (
         <div>
-            {isProductPreLoading
-                ?
-                <Loader/>
-                :
-                <div className="products">
-                    {products.map(product =>
-                        <ProductItem
-                            product={product}
-                            key={product.id}
-                        />
-                    )}
+            <AdminProductsForm initProducts={initProducts}/>
+
+            <div>
+                {isProductPreLoading
+                    ?
+                    <Loader/>
+                    :
+                    <div className="products">
+                        {products.map(product =>
+                            <AdminProductItem
+                                initProducts={initProducts}
+                                product={product}
+                                setItem={setItem}
+                                key={product.id}
+                            />
+                        )}
 
 
-                    <div ref={lastElem} style={{width: "100vw", height: 2}}/>
-                </div>
-            }
-            {isProductsExists && isProductLoading && <Loader/>}
+                        <div ref={lastElem} style={{width: "100vw", height: 2}}/>
+                    </div>
+                }
+                {isProductsExists && isProductLoading && <Loader/>}
+            </div>
         </div>
     );
 };
 
-export default Products;
+export default AdminProducts;
