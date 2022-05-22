@@ -415,6 +415,8 @@ footer{
     letter-spacing: 3px;
 }
 .fillings__item-content__top span{
+    display: flex;
+    align-items: center;
     font-family: 'chalk', serif;
     font-weight: 800;
     color: var(--orange);
@@ -434,8 +436,22 @@ footer{
         align-items: center;
         flex-direction: column;
     }
+    .fillings__item-content{
+        padding: 10px 20px;
+    }
     .fillings__item{
+        margin-top: 0;
+        margin-bottom: 30px;
         width: 90%;
+    }
+    .fillings__item-img{
+        height: 300px;
+    }
+    .fillings__item-content__top h3{
+        font-size: 2rem;
+    }
+    .fillings__item-content__top span{
+        font-size: 1.5rem;
     }
 }
 /*ADMIN*/
