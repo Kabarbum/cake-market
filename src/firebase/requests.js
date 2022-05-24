@@ -68,7 +68,13 @@ export function addFilling(filling) {
         }
     );
 }
-
+export const addCategory = async (category) => {
+    const categoriesRef = collection(firestore, "categories");
+    await setDoc(doc(categoriesRef, `category_${category.id}`), {
+        id: category.id,
+        title: category.title
+    })
+}
 export const fetchProducts = async (lmt, categoryId = 0, order = ["id", "asc"]) => {
 
     const q = categoryId === 0
@@ -180,8 +186,12 @@ export const updateFilling = async (filling, prevFillingUrl, dispatch) => {
         composition: filling.composition,
         price: filling.price,
     });
-
-
+}
+export const updateCategory = async (category) => {
+    const categoryRef = doc(firestore, "categories", `category_${category.id}`);
+    await updateDoc(categoryRef, {
+        title: category.title
+    });
 }
 export const deleteProduct = async (id, Url) => {
     let url = (new URL(Url)).pathname.split("%2F")
@@ -208,4 +218,7 @@ export const deleteFilling = async (id, Url) => {
     }).catch((error) => {
         console.log("Uh-oh, an error occurred!", error)
     });
+}
+export const deleteCategory = async (id) => {
+    await deleteDoc(doc(firestore, "categories", `category_${id}`));
 }

@@ -495,6 +495,12 @@ footer{
     justify-content: center;
     color: #fff;
 }
+@media (max-width: 500px) {
+    .admin-header{
+        flex-direction: column;
+    }
+    
+}
 .admin-header div{
     padding: 5px 15px 0;
     border-top-left-radius: 15px;
@@ -600,4 +606,49 @@ select.product-form-left__item{
     background-color: #74a8ff;
     font-family: Arial, serif;
     cursor: pointer;
+}
+/*categories admin*/
+.categories-content{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.categories-content-top{
+    display: flex;
+}
+.categories-content-top input{
+    margin-right: 10px;
+    padding: 7px 10px;
+    font-size: 1.2rem;
+}
+.category-btn{
+    display: flex;
+    align-items: center;
+    padding: 7px 10px;
+    color: #fff;
+    background-color: #666;
+    border: 1px solid var(--orange);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: .2s;
+}
+.category-btn:hover{
+    background-color: #fff;
+    color: #222;
+}
+.categories-content-list{
+    margin-top: 15px;
+    list-style-type: none;
+    color: #fff;
+}
+.categories-content-list li{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+}
+.category-btns{
+    display: flex;
 }

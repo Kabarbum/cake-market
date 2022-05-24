@@ -23,6 +23,11 @@ const SET_FILLING_URL = "SET_FILLING_URL"
 const SET_PREV_FILLING_URL = "SET_PREV_FILLING_URL"
 const SET_FILLING_CHANGING = "SET_FILLING_CHANGING"
 
+const SET_CATEGORY = "SET_CATEGORY"
+const SET_CATEGORY_ID = "SET_CATEGORY_ID"
+const SET_CATEGORY_TITLE = "SET_CATEGORY_TITLE"
+const SET_CATEGORY_CHANGING = "SET_CATEGORY_CHANGING"
+
 
 const initialState = {
     isAuth: true,
@@ -35,6 +40,8 @@ const initialState = {
         categoryId: 1,
         imgUrl: "https://placehold.co/600"
     },
+    prevProductUrl: "",
+    isProductChanging: false,
     filling: {
         id: uuidv4(),
         title: "",
@@ -42,10 +49,13 @@ const initialState = {
         price: 0,
         imgUrl: "https://placehold.co/600"
     },
-    prevProductUrl: "",
     prevFillingUrl: "",
-    isProductChanging: false,
     isFillingChanging: false,
+    category: {
+        id: uuidv4(),
+        title: ""
+    },
+    isCategoryChanging: false,
 }
 
 export default function adminReducer(state = initialState, action) {
@@ -136,6 +146,19 @@ export default function adminReducer(state = initialState, action) {
             return {...state, prevFillingUrl: action.payload}
         case SET_FILLING_CHANGING:
             return {...state, isFillingChanging: action.payload}
+        case SET_CATEGORY:
+            return {
+                ...state, category: {
+                    id: uuidv4(),
+                    title: ""
+                }
+            }
+        case SET_CATEGORY_ID:
+            return {...state, category: {...state.category, id: action.payload}}
+        case SET_CATEGORY_TITLE:
+            return {...state, category: {...state.category, title: action.payload}}
+        case SET_CATEGORY_CHANGING:
+            return {...state, isCategoryChanging: action.payload}
         default:
             return state
     }
@@ -163,3 +186,8 @@ export const setFillingPriceAction = (payload) => ({type: SET_FILLING_PRICE, pay
 export const setFillingUrlAction = (payload) => ({type: SET_FILLING_URL, payload})
 export const setPrevFillingUrlAction = (payload) => ({type: SET_PREV_FILLING_URL, payload})
 export const setFillingChangingAction = (payload) => ({type: SET_FILLING_CHANGING, payload})
+
+export const setCategoryAction = () => ({type: SET_CATEGORY})
+export const setCategoryIdAction = (payload) => ({type: SET_CATEGORY_ID, payload})
+export const setCategoryTitleAction = (payload) => ({type: SET_CATEGORY_TITLE, payload})
+export const setCategoryChangingAction = (payload) => ({type: SET_CATEGORY_CHANGING, payload})
