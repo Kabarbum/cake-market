@@ -319,7 +319,14 @@ footer{
     padding: 6px 10px;
     text-align: center;
     background-color: #fff;
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-family: "Arial", serif;
     cursor: pointer;
+}
+.products-item__btn:hover{
+    background-color: var(--orange);
 }
 /*FILLINGS*/
 
@@ -402,6 +409,7 @@ footer{
     padding: 30px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     flex: 1 0 auto;
     color: #000;
 }
@@ -429,6 +437,30 @@ footer{
     text-align: left;
     font-size: 1.4rem;
     font-family: 'Roboto Light', sans-serif;
+}
+.fillings__item-btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.fillings__item-btns div{
+    margin-top: 10px;
+    padding: 6px 10px;
+    border: 1px solid var(--orange);
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Arial", serif;
+    cursor: pointer;
+}
+.fillings__item-btns div:hover{
+     background-color: var(--orange);
+ }
+@media (max-width: 1024px){
+    .fillings__item-img{
+        height: 250px;
+    }
 }
 @media (max-width: 768px) {
     .fillings__section-content{
@@ -479,6 +511,7 @@ footer{
 }
 /*admin add products*/
 .product-form{
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -535,4 +568,36 @@ select.product-form-left__item{
 .product-for-btns div:hover{
     background-color: #fff;
     border-color: #b3e8ff;
+}
+
+@media (max-width:768px) {
+    .product-form{
+        flex-direction: column-reverse;
+    }
+    .product-form-left, .product-form-right{
+        width: 100%;
+    }
+}
+/*fillings admin*/
+.filling-composition li{
+    list-style-type: none;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.filling-composition li input{
+    min-width: 90%;
+    margin-top: 0;
+}
+.filling-composition li img{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.composition__add{
+    padding: 5px 10px;
+    border: 1px solid #E7BF3A;
+    border-radius: 10px;
+    background-color: #74a8ff;
+    font-family: Arial, serif;
+    cursor: pointer;
 }

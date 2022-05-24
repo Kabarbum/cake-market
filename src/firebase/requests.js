@@ -8,15 +8,16 @@ import {
     orderBy,
     limit,
     startAfter,
-    deleteDoc
+    deleteDoc, updateDoc, deleteField
 } from "firebase/firestore";
 import {firestore, storage} from "./index";
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
+import {setFillingUrlAction, setProductUrlAction} from "../store/reducers/admin";
 
 
 export function AddProduct(product) {
-    const productsImgRef = ref(storage, `products/product_img_${product.id}`)
-    const uploadTask = uploadBytesResumable(productsImgRef, product.imgUrl)
+    const productImgRef = ref(storage, `products/product_img_${product.id}`)
+    const uploadTask = uploadBytesResumable(productImgRef, product.imgUrl)
     uploadTask.on('state_changed',
         (snapshot) => {
             // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -36,6 +37,32 @@ export function AddProduct(product) {
                     weight: Number(product.weight),
                     categoryId: Number(product.categoryId),
                     imgUrl: product.imgUrl
+                })
+            });
+        }
+    );
+}
+
+export function addFilling(filling) {
+    const fillingImgRef = ref(storage, `fillings/filling_img_${filling.id}`)
+    const uploadTask = uploadBytesResumable(fillingImgRef, filling.imgUrl)
+    uploadTask.on('state_changed',
+        (snapshot) => {
+            // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+            console.log("Upload image error: ", error)
+        },
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                filling = {...filling, imgUrl: downloadURL}
+                const fillingsRef = collection(firestore, "fillings");
+                await setDoc(doc(fillingsRef, filling.id), {
+                    id: filling.id,
+                    title: filling.title,
+                    composition: filling.composition,
+                    price: Number(filling.price),
+                    imgUrl: filling.imgUrl
                 })
             });
         }
@@ -100,7 +127,60 @@ export const fetchFillings = async () => {
     querySnapshot.forEach(doc => arr.push(doc.data()));
     return arr
 }
-export const updateProduct = () => {
+export const updateProduct = async (product, prevProductUrl, dispatch) => {
+    const productRef = doc(firestore, "products", "product_" + product.id);
+    if (prevProductUrl !== product.imgUrl) {
+        const productImgRef = ref(storage, `products/product_img_${product.id}`)
+
+        const uploadTask = uploadBytesResumable(productImgRef, product.imgUrl)
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            },
+            (error) => {
+                console.log("Upload image error: ", error)
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                    dispatch(setProductUrlAction(downloadURL))
+                    await updateDoc(productRef, {...product, imgUrl: downloadURL});
+                });
+            }
+        );
+    } else {
+        await updateDoc(productRef, product);
+    }
+}
+export const updateFilling = async (filling, prevFillingUrl, dispatch) => {
+    const fillingRef = doc(firestore, "fillings", filling.id);
+    if (prevFillingUrl !== filling.imgUrl) {
+        const fillingImgRef = ref(storage, `fillings/filling_img_${filling.id}`)
+
+        const uploadTask = uploadBytesResumable(fillingImgRef, filling.imgUrl)
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            },
+            (error) => {
+                console.log("Upload image error: ", error)
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(async downloadURL => {
+                    dispatch(setFillingUrlAction(downloadURL))
+                    await updateDoc(fillingRef, {imgUrl: downloadURL});
+                });
+            }
+        );
+    }
+    await updateDoc(fillingRef, {
+        id: filling.id,
+        title: filling.title,
+        composition: filling.composition,
+        price: filling.price,
+    });
+
 
 }
 export const deleteProduct = async (id, Url) => {
@@ -113,6 +193,19 @@ export const deleteProduct = async (id, Url) => {
     deleteObject(productImgRef).then(() => {
         console.log("File deleted successfully")
     }).catch((error) => {
-        console.log("Uh-oh, an error occurred!")
+        console.log("Uh-oh, an error occurred!", error)
+    });
+}
+export const deleteFilling = async (id, Url) => {
+    let url = (new URL(Url)).pathname.split("%2F")
+    url = url[url.length - 1]
+
+    await deleteDoc(doc(firestore, "fillings", id));
+
+    const fillingImgRef = ref(storage, `fillings/${url}`);
+    deleteObject(fillingImgRef).then(() => {
+        console.log("File deleted successfully")
+    }).catch((error) => {
+        console.log("Uh-oh, an error occurred!", error)
     });
 }

@@ -3,12 +3,8 @@ import AdminProductsForm from "./AdminProductsForm";
 import Loader from "./UI/Loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    fetchMoreProductsAction,
-    setLastVisibleAction,
-    setProductLoadingAction,
     setProductsExistsAction
 } from "../store/reducers/products";
-import {fetchMoreProducts} from "../firebase/requests";
 import AdminProductItem from "./AdminProductItem";
 import {
     setProductCategoryIdAction, setProductChangingAction,
@@ -17,44 +13,29 @@ import {
     setProductTitleAction,
     setProductWeightAction, setPrevProductUrlAction
 } from "../store/reducers/admin";
+import {fetchMore, initProducts} from "../utils";
 
-const AdminProducts = ({initProducts}) => {
+const AdminProducts = () => {
     const dispatch = useDispatch()
     const products = useSelector(state => state.products.products)
-    const isProductPreLoading = useSelector(state => state.products.isProductPreLoading)
     const isProductLoading = useSelector(state => state.products.isProductLoading)
-    const isProductsExists = useSelector(state => state.products.isProductsExists)
-
+    const isProductPreLoading = useSelector(state => state.products.isProductPreLoading)
+    //for fetchMore
     const selectedSort = useSelector(state => state.products.selectedSort)
     const selectedCategoryId = useSelector(state => state.products.selectedCategoryId)
     const limit = useSelector(state => state.products.limit)
     const lastVisible = useSelector(state => state.products.lastVisible)
+    const isProductsExists = useSelector(state => state.products.isProductsExists)
 
     const observer = React.useRef()
     const lastElem = React.useRef()
 
-    const fetchMore = async () => {
-        if (!isProductsExists) return
-        dispatch(setProductLoadingAction(true))
-
-        const products = await fetchMoreProducts(selectedCategoryId, selectedSort, limit, lastVisible)
-        if (products.length === 0) {
-            dispatch(setProductLoadingAction(false))
-            dispatch(setProductsExistsAction(false))
-            return
-        }
-
-        dispatch(setLastVisibleAction(products[products.length - 1].id))
-        dispatch(fetchMoreProductsAction(products))
-        dispatch(setProductLoadingAction(false))
-    }
-
     useEffect(() => {
         if (isProductPreLoading) return
         if (observer.current) observer.current.disconnect()
-        const callback = function (entries, observer) {
+        const callback = async function (entries, observer) {
             if (entries[0].isIntersecting && !isProductLoading) {
-                fetchMore()
+                await fetchMore(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists, dispatch)
             }
         }
         observer.current = new IntersectionObserver(callback)
@@ -63,6 +44,7 @@ const AdminProducts = ({initProducts}) => {
     }, [isProductPreLoading, isProductLoading])
 
     const setItem = (product) => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         dispatch(setProductChangingAction(true))
         dispatch(setProductIdAction(product.id))
         dispatch(setProductTitleAction(product.title))
@@ -73,9 +55,19 @@ const AdminProducts = ({initProducts}) => {
         dispatch(setProductUrlAction(product.imgUrl))
         dispatch(setPrevProductUrlAction(product.imgUrl))
     }
+
+    useEffect(() => {
+        dispatch(setProductsExistsAction(true))
+        async function fetchData() {
+            await initProducts(dispatch)
+        }
+        fetchData();
+
+    }, [])
+
     return (
         <div>
-            <AdminProductsForm initProducts={initProducts}/>
+            <AdminProductsForm/>
 
             <div>
                 {isProductPreLoading
@@ -85,7 +77,6 @@ const AdminProducts = ({initProducts}) => {
                     <div className="products">
                         {products.map(product =>
                             <AdminProductItem
-                                initProducts={initProducts}
                                 product={product}
                                 setItem={setItem}
                                 key={product.id}

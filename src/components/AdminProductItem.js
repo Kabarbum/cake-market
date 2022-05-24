@@ -2,7 +2,7 @@ import React from 'react';
 import {deleteProduct} from "../firebase/requests";
 import {useSelector} from "react-redux";
 
-const ProductItem = ({product, setItem, initProducts}) => {
+const ProductItem = ({product, setItem}) => {
     const categories = useSelector(state=>state.products.categories)
     const changeHandle = () => {
         setItem(product)
@@ -10,7 +10,6 @@ const ProductItem = ({product, setItem, initProducts}) => {
     const deleteHandle = () => {
         const res = window.confirm("Удалить?")
         if(res) {
-            initProducts()
             deleteProduct(product.id, product.imgUrl)
         }
     }

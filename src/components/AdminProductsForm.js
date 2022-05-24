@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
-import {getDownloadURL, ref, uploadBytesResumable, deleteObject} from "firebase/storage";
-import {storage} from "../firebase";
-import {AddProduct} from "../firebase/requests";
+import {AddProduct, updateProduct} from "../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
-import {doc, updateDoc} from "firebase/firestore";
 import {
     setProductAction,
     setProductCategoryIdAction, setProductChangingAction,
@@ -12,9 +9,8 @@ import {
     setProductTitleAction,
     setProductWeightAction
 } from "../store/reducers/admin";
-import {firestore} from "../firebase";
 
-const AdminProductsForm = ({initProducts}) => {
+const AdminProductsForm = () => {
     const dispatch = useDispatch()
     const categories = useSelector(state => state.products.categories).filter(cat => cat.id !== 0)
     const product = useSelector(state => state.admin.product)
@@ -77,7 +73,6 @@ const AdminProductsForm = ({initProducts}) => {
         AddProduct(product)
         dispatch(setProductAction())
         setError("")
-        initProducts()
     }
 
     function isValidHttpUrl(string) {
@@ -89,34 +84,9 @@ const AdminProductsForm = ({initProducts}) => {
     const handleSave = async () => {
         dispatch(setProductChangingAction(false))
 
-        const productRef = doc(firestore, "products", "product_" + product.id);
-
-        if(prevProductUrl !== product.imgUrl){
-            const productsRef = ref(storage, `products/product_img_${product.id}`)
-
-            const uploadTask = uploadBytesResumable(productsRef, product.imgUrl)
-
-            uploadTask.on('state_changed',
-                (snapshot) => {
-                    // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                },
-                (error) => {
-                    console.log("Upload image error: ", error)
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                        dispatch(setProductUrlAction(downloadURL))
-                        await updateDoc(productRef, {...product, imgUrl:downloadURL});
-                    });
-                }
-            );
-        }
-        else{
-            await updateDoc(productRef, product);
-        }
+        await updateProduct(product, prevProductUrl, dispatch)
         dispatch(setProductAction())
         setError("")
-        initProducts()
     }
 
     const handleCancel = () => {
