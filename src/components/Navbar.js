@@ -4,6 +4,7 @@ import vk from "../img/vk.png"
 import inst from "../img/instagram.png"
 import MyMenu from "./UI/Menu/MyMenu";
 import {useDispatch, useSelector} from "react-redux";
+import {setMenuVisibleAction} from "../store/reducers/menu";
 
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
     const dispatch = useDispatch()
 
     function setMenuVisible(payload) {
-        dispatch({type: "SET_MENU_VISIBLE", payload: payload})
+        dispatch(setMenuVisibleAction(payload))
     }
 
     return (

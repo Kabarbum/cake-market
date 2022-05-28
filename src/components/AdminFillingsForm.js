@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
-import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
-import {storage} from "../firebase";
-import {addFilling, AddProduct, updateFilling} from "../firebase/requests";
+import {addFilling, updateFilling} from "../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
-import {doc, updateDoc} from "firebase/firestore";
 import {
-    setProductTitleAction,
-    setFillingCompositionAction,
     setFillingPriceAction,
     setFillingUrlAction,
     setFillingAction,

@@ -3,9 +3,12 @@ import "./MyMenu.css"
 import {Link} from "react-router-dom";
 
 const MyMenu = ({isMenuVisible, setMenuVisible}) => {
+    const menuHandler = () => {
+        setMenuVisible(false)
+    }
     return (
         isMenuVisible &&
-        <div className='menu' onClick={()=>setMenuVisible(false)}>
+        <div className='menu' onClick={menuHandler}>
             <ul>
                 <li><Link to="">Каталог</Link></li>
                 <li><Link to="/fillings">Начинки</Link></li>

@@ -486,6 +486,68 @@ footer{
         font-size: 1.5rem;
     }
 }
+/*calendar*/
+
+.calendar__wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.calendar__header{
+    display: flex;
+    font-size: 1.5rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+.calendar__header div{
+    cursor: pointer;
+}
+.calendar__header div.active{
+    color: var(--orange);
+}
+.calendar__map{
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 560px;
+    max-width: 560px;
+}
+.calendar__map-header{
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 560px;
+    max-width: 560px;
+}
+.calendar__map-header div{
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+    color: #fff;
+}
+.calendar__ceil{
+    width: 80px;
+    height: 80px;
+    font-family: "Rage Italic", serif;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #fff;
+    color: #fff;
+}
+.calendar__ceil.blank{
+    background-color: rgba(0,0,0,.5)
+}
+.calendar__ceil.active{
+    background-image: url("./img/active-bg.png");
+    background-size: 50%;
+}
+.calendar__ceil.cross{
+    background-image: url("./img/cross-bg.png");
+    background-size: 100%;
+}
+
 /*ADMIN*/
 .admin-container{
 }
@@ -505,7 +567,7 @@ footer{
     padding: 5px 15px 0;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 .admin-header div.active{
@@ -513,7 +575,7 @@ footer{
     border-bottom-color: rgba(208,241,255,0);
 }
 .admin-header div:not(:last-child){
-    margin-right: 40px;
+    margin-right: 10px;
 }
 /*admin add products*/
 .product-form{
@@ -651,4 +713,39 @@ select.product-form-left__item{
 }
 .category-btns{
     display: flex;
+}
+.admin-calendar__content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+}
+.admin-calendar__form{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.admin-calendar__btn{
+    margin-left: 8px;
+    padding: 7px 10px;
+    border: 1px solid #E7BF3A;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.admin-calendar__list ul{
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+.admin-calendar__list ul li{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+}
+.admin-calendar__delete-btn{
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    background-image: url("./img/cross.png");
+    cursor: pointer;
 }

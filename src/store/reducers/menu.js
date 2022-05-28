@@ -12,3 +12,5 @@ export default function menuReducer(state = initialState, action) {
             return state
     }
 }
+
+export const setMenuVisibleAction = (payload) => ({type: SET_MENU_VISIBLE, payload})

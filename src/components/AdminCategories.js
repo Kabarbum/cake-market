@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setCategoryAction,
@@ -6,7 +6,8 @@ import {
     setCategoryIdAction,
     setCategoryTitleAction
 } from "../store/reducers/admin";
-import {addCategory, deleteCategory, updateCategory} from "../firebase/requests";
+import {addCategory, deleteCategory, fetchCategories, updateCategory} from "../firebase/requests";
+import {fetchCategoriesAction} from "../store/reducers/products";
 
 const AdminFillings = () => {
     const dispatch = useDispatch()
@@ -38,7 +39,14 @@ const AdminFillings = () => {
     const deleteHandler = (id) => {
         deleteCategory(id)
     }
-
+    useEffect(()=>{
+        async function fetchData() {
+            let categories = await fetchCategories()
+            categories = categories.sort((a, b) => a.id - b.id)
+            dispatch(fetchCategoriesAction(categories))
+        }
+        fetchData()
+    },[])
     return (
         <div className="categories-content">
             <div>

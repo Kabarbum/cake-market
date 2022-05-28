@@ -8,11 +8,12 @@ import {
     orderBy,
     limit,
     startAfter,
-    deleteDoc, updateDoc, deleteField
+    deleteDoc, updateDoc
 } from "firebase/firestore";
 import {firestore, storage} from "./index";
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {setFillingUrlAction, setProductUrlAction} from "../store/reducers/admin";
+import {v4 as uuidv4} from "uuid";
 
 
 export function AddProduct(product) {
@@ -68,6 +69,7 @@ export function addFilling(filling) {
         }
     );
 }
+
 export const addCategory = async (category) => {
     const categoriesRef = collection(firestore, "categories");
     await setDoc(doc(categoriesRef, `category_${category.id}`), {
@@ -221,4 +223,24 @@ export const deleteFilling = async (id, Url) => {
 }
 export const deleteCategory = async (id) => {
     await deleteDoc(doc(firestore, "categories", `category_${id}`));
+}
+export const fetchDates = async () => {
+    const q = query(collection(firestore, "dates"));
+
+    const querySnapshot = await getDocs(q);
+    let arr = []
+    querySnapshot.forEach((doc) => {
+        arr.push({id: doc.id, ...doc.data()})
+    });
+    return arr
+}
+export const addDate = async (date) => {
+    const datesRef = collection(firestore, "dates");
+    await setDoc(doc(datesRef, `date_${uuidv4()}`), {
+        date
+    })
+}
+
+export const deleteDate = async (id) => {
+    await deleteDoc(doc(firestore, "dates", `${id}`));
 }

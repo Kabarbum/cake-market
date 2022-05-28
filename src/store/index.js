@@ -7,12 +7,14 @@ import adminReducer from "./reducers/admin";
 import {firebaseReducer, getFirebase} from 'react-redux-firebase'
 import {firestoreReducer} from 'redux-firestore'
 import fillingsReducer from "./reducers/fillings";
+import calendarReducer from "./reducers/calendar";
 
 const rootReducer = combineReducers({
     menu: menuReducer,
     products: productsReducer,
     fillings: fillingsReducer,
     admin: adminReducer,
+    calendar: calendarReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer
 })

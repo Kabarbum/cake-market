@@ -2,11 +2,13 @@ import React from 'react';
 import Inst from "../img/contact-inst.png";
 import VK from "../img/contact-vk.png";
 import WhatsUp from "../img/contact-whatsapp.png";
+import Calendar from "../components/Calendar";
 
 const Order = () => {
     return (
         <div>
-           order page
+           <Calendar/>
+
             <div className="contacts">
                 <div className="container">
 
