@@ -108,6 +108,7 @@ const AdminProductsForm = () => {
                     value={product.description}
                     onChange={e => setDescription(e.target.value)}
                 />
+                <h3>Цена:</h3>
                 <input
                     placeholder="Цена..."
                     className="product-form-left__item"
@@ -115,6 +116,7 @@ const AdminProductsForm = () => {
                     value={product.price}
                     onChange={e => setPrice(Number(e.target.value))}
                 />
+                <h3>Вес:</h3>
                 <input
                     placeholder="Вес..."
                     className="product-form-left__item"

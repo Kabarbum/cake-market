@@ -20,7 +20,8 @@ const AdminFillings = () => {
     }
     const addHandler = () => {
         addCategory(category)
-        dispatch(setCategoryAction())
+        dispatch(setCategoryAction(categories.length+2))
+        setTimeout(fetchData, 1000)
     }
     const changeHandler = (id, title) => {
         dispatch(setCategoryChangingAction(true))
@@ -29,7 +30,8 @@ const AdminFillings = () => {
     }
     const saveHandler = () => {
         updateCategory(category)
-        dispatch(setCategoryAction())
+        dispatch(setCategoryAction(categories.length+2))
+        setTimeout(fetchData, 1000)
         dispatch(setCategoryChangingAction(false))
     }
     const cancelHandler = () => {
@@ -38,22 +40,27 @@ const AdminFillings = () => {
     }
     const deleteHandler = (id) => {
         deleteCategory(id)
+        dispatch(setCategoryAction(categories.length))
+        setTimeout(fetchData, 1000)
     }
-    useEffect(()=>{
-        async function fetchData() {
-            let categories = await fetchCategories()
-            categories = categories.sort((a, b) => a.id - b.id)
-            dispatch(fetchCategoriesAction(categories))
-        }
+
+    async function fetchData() {
+        let categories = await fetchCategories()
+        categories = categories.sort((a, b) => a.id - b.id)
+        dispatch(fetchCategoriesAction(categories))
+        dispatch(setCategoryAction(categories.length))
+    }
+
+    useEffect(() => {
         fetchData()
-    },[])
+    }, [])
     return (
         <div className="categories-content">
             <div>
                 <div className="categories-content-top">
                     <input type="text" value={category.title} onChange={e => setTitle(e.target.value)}/>
                     {isCategoryChanging
-                        ? <div style={{display:"flex"}}>
+                        ? <div style={{display: "flex"}}>
                             <div className="category-btn" onClick={saveHandler}>Сохранить</div>
                             <div className="category-btn" onClick={cancelHandler}>Отменить</div>
                         </div>

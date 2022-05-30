@@ -118,6 +118,7 @@ const AdminProductsForm = () => {
                         <div className="composition__add" onClick={addHandler}>добавить</div>
                     </li>
                 </ul>
+                <h3>Цена:</h3>
                 <input
                     placeholder="Цена..."
                     className="product-form-left__item"

@@ -9,6 +9,7 @@ import {setMenuVisibleAction} from "../store/reducers/menu";
 
 const Navbar = () => {
     const isMenuVisible = useSelector(state => state.menu.isMenuVisible)
+    const isAuth = useSelector(state=>state.admin.isAuth)
     const dispatch = useDispatch()
 
     function setMenuVisible(payload) {
@@ -34,9 +35,12 @@ const Navbar = () => {
                     <li className="nav-item">
                         <NavLink to="/order"><nobr>Как заказать</nobr></NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink to="/admin">Д</NavLink>
-                    </li>
+                    {isAuth &&
+                        <li className="nav-item">
+                            <NavLink to="/admin">Д</NavLink>
+                        </li>
+                    }
+
 
                     <li className="socials">
 

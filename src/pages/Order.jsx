@@ -8,20 +8,6 @@ import brushBg from "../img/cross-bg.png"
 const Order = () => {
     return (
         <div>
-            <div className="calendar-description">
-                <div className="calendar-description__list">
-                    <div className="calendar-description__list-item">
-                        <div className="calendar-description__img"><img src={activeBg} alt="cake"/></div>
-                        <span> - Свободный для заказа день</span>
-                    </div>
-                    <div className="calendar-description__list-item">
-                        <div className="calendar-description__img"><img src={brushBg} alt="cross"/></div>
-                        <span> - День уже заполнен</span>
-                    </div>
-                </div>
-            </div>
-            <Calendar/>
-
             <div className="contacts">
                 <div className="container">
 
@@ -39,10 +25,23 @@ const Order = () => {
                             <a href="https://api.whatsapp.com/send/?phone=79026017967">
                                 <img src={WhatsUp} alt="WhatsUp"/></a>
                         </div>
+                        <div className="calendar-description__list">
+                            <div className="calendar-description__list-item">
+                                <div className="calendar-description__img"><img src={activeBg} alt="cake"/></div>
+                                <span> - Свободный для заказа день</span>
+                            </div>
+                            <div className="calendar-description__list-item">
+                                <div className="calendar-description__img"><img src={brushBg} alt="cross"/></div>
+                                <span> - День уже заполнен</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
+
+            <Calendar/>
+
         </div>
     );
 };
