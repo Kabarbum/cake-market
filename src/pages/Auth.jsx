@@ -5,17 +5,16 @@ import {useNavigate} from "react-router-dom"
 
 const Auth = () => {
     const dispatch = useDispatch()
-    const [login, setLogin] = useState()
-    const [password, setPassword] = useState()
+    const [login, setLogin] = useState("")
+    const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const lgn = useSelector(state=>state.admin.login)
-    const psw = useSelector(state=>state.admin.password)
+    const lgn = useSelector(state => state.admin.login)
+    const psw = useSelector(state => state.admin.password)
     const authHandler = () => {
-        if(login===lgn && password === psw) {
+        if (login === lgn && password === psw) {
             dispatch(setAuth(true))
             navigate("/admin");
-        }
-        else
+        } else
             alert("Уходи вон отсюда, паршивка вонючая^_^")
     }
     return (
