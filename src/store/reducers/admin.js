@@ -32,7 +32,7 @@ const SET_AUTH = "SET_AUTH"
 
 
 const initialState = {
-    isAuth: true,
+    isAuth: false,
     login: process.env.REACT_APP_LOGIN,
     password: process.env.REACT_APP_PASSWORD,
     product: {

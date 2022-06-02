@@ -17,7 +17,7 @@ const initialState = {
         {id: 1, title: "Цена: по убыванию", value: ["price", "desc"]},
     ],
     selectedSort: ["id", "asc"],
-    limit: 3,
+    limit: 6,
     lastVisible: "0",
     isProductPreLoading: false,
     isProductLoading: false,
