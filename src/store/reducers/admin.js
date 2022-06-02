@@ -33,8 +33,8 @@ const SET_AUTH = "SET_AUTH"
 
 const initialState = {
     isAuth: true,
-    login: "admin",
-    password: "1",
+    login: process.env.REACT_APP_LOGIN,
+    password: process.env.REACT_APP_PASSWORD,
     product: {
         id: uuidv4(),
         title: "",

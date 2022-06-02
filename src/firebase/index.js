@@ -3,7 +3,7 @@ import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAmWvQWD2taK2VdkKbY627CuLNoS0_CHgU",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "cake-market-859d1.firebaseapp.com",
     projectId: "cake-market-859d1",
     storageBucket: "cake-market-859d1.appspot.com",
