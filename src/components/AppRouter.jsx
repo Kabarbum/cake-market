@@ -1,26 +1,11 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import {adminRoutes, publicRoutes} from "../router";
+import {publicRoutes} from "../router";
 import Catalog from "../pages/Catalog";
-import {useSelector} from "react-redux";
 
 const AppRouter = () => {
-    const isAuth = useSelector(state => state.admin.isAuth)
 
-    return (isAuth
-            ?
-            <Routes>
-                {adminRoutes.map(route =>
-                    <Route
-                        path={route.path}
-                        element={route.element}
-                        exact={route.exact}
-                        key={route.path}
-                    />
-                )}
-                <Route path="*" element={<Catalog/>}/>
-            </Routes>
-            :
+    return (
             <Routes>
                 {publicRoutes.map(el =>
                     <Route

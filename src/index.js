@@ -22,9 +22,9 @@ const rrfProps = {
 root.render(
     <Provider store={store}>
         <BrowserRouter>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-            <App/>
-        </ReactReduxFirebaseProvider>
+            <ReactReduxFirebaseProvider {...rrfProps}>
+                <App/>
+            </ReactReduxFirebaseProvider>
         </BrowserRouter>
     </Provider>
 );
