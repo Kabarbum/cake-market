@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 
 const AdminCalendar = () => {
     const [date, setDate] = useState("")
-    const [time, setTime] = useState(new Date())
+    const [time] = useState(new Date())
     const data = `${time.getFullYear()}-${time.getMonth() + 1 > 9 ? time.getMonth() + 1 : `0${time.getMonth() + 1}`}-${time.getDate()}`
     const dates = useSelector(state => state.calendar.dates).sort((a, b) => {
         let ai = a.date.split('.')

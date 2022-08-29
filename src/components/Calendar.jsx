@@ -7,7 +7,7 @@ import {fetchCalendarDates} from "../utils";
 const Calendar = () => {
     const dispatch = useDispatch()
     const dates = useSelector(state => state.calendar.dates)
-    const [date1, setDate1] = useState(new Date())
+    const [date1] = useState(new Date())
     const [date2, setDate2] = useState(new Date())
     const [currentDate, setCurrentDate] = useState(0)
 
