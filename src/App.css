@@ -241,6 +241,12 @@ footer{
   background-color: rgba(160,160,160,.6);
   color: var(--orange);
 }
+/*order page*/
+.order-page{
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+}
 /*calendar*/
 
 .calendar-description{

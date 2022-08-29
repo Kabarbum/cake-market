@@ -7,7 +7,7 @@ import activeBg from "../img/active-bg.png"
 import brushBg from "../img/cross-bg.png"
 const Order = () => {
     return (
-        <div>
+        <div className="order-page">
             <div className="contacts">
                 <div className="container">
 

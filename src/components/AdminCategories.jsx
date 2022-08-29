@@ -19,8 +19,10 @@ const AdminFillings = () => {
         dispatch(setCategoryTitleAction(value))
     }
     const addHandler = () => {
+        console.log(category)
+        console.log(categories[categories.length-1].id)
         addCategory(category)
-        dispatch(setCategoryAction(categories.length+2))
+        dispatch(setCategoryAction(categories[categories.length-1].id+2))
         setTimeout(fetchData, 1000)
     }
     const changeHandler = (id, title) => {
@@ -30,17 +32,17 @@ const AdminFillings = () => {
     }
     const saveHandler = () => {
         updateCategory(category)
-        dispatch(setCategoryAction(categories.length+2))
+        dispatch(setCategoryAction(categories[categories.length-1].id+1))
         setTimeout(fetchData, 1000)
         dispatch(setCategoryChangingAction(false))
     }
     const cancelHandler = () => {
         dispatch(setCategoryChangingAction(false))
-        dispatch(setCategoryAction())
+        dispatch(setCategoryAction(categories[categories.length-1].id+1))
     }
     const deleteHandler = (id) => {
         deleteCategory(id)
-        dispatch(setCategoryAction(categories.length))
+        dispatch(setCategoryAction(categories[categories.length-1].id+1))
         setTimeout(fetchData, 1000)
     }
 
@@ -48,7 +50,7 @@ const AdminFillings = () => {
         let categories = await fetchCategories()
         categories = categories.sort((a, b) => a.id - b.id)
         dispatch(fetchCategoriesAction(categories))
-        dispatch(setCategoryAction(categories.length))
+        dispatch(setCategoryAction(categories[categories.length-1].id+1))
     }
 
     useEffect(() => {
