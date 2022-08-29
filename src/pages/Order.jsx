@@ -28,11 +28,11 @@ const Order = () => {
                         <div className="calendar-description__list">
                             <div className="calendar-description__list-item">
                                 <div className="calendar-description__img"><img src={activeBg} alt="cake"/></div>
-                                <span> - Свободный для заказа день</span>
+                                <span> - Свободный день для заказа</span>
                             </div>
                             <div className="calendar-description__list-item">
                                 <div className="calendar-description__img"><img src={brushBg} alt="cross"/></div>
-                                <span> - День уже заполнен</span>
+                                <span> - Дата занята</span>
                             </div>
                         </div>
                     </div>
