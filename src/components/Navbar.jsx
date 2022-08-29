@@ -35,7 +35,6 @@ const Navbar = () => {
                         <NavLink to="/order"><nobr>Как заказать</nobr></NavLink>
                     </li>
 
-
                     <li className="socials">
 
                         <a href="https://vk.com/karamel_zlat">
