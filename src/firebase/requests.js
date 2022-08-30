@@ -10,11 +10,11 @@ import {
 import {firestore} from "./index";
 
 
-export const fetchProducts = async (lmt, categoryId = 0, order = ["id", "asc"]) => {
+export const fetchProducts = async (lmt, categoryId = 0) => {
 
     const q = categoryId === 0
-        ? query(collection(firestore, "products"), limit(lmt), orderBy(order[0], order[1]))
-        : query(collection(firestore, "products"), where("categoryId", "==", categoryId), limit(lmt), orderBy(order[0], order[1]))
+        ? query(collection(firestore, "products"), limit(lmt))
+        : query(collection(firestore, "products"), where("categoryId", "==", categoryId), limit(lmt))
 
 
     const querySnapshot = await getDocs(q);
