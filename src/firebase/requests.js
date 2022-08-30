@@ -20,9 +20,7 @@ export function AddProduct(product) {
     const productImgRef = ref(storage, `products/product_img_${product.id}`)
     const uploadTask = uploadBytesResumable(productImgRef, product.imgUrl)
     uploadTask.on('state_changed',
-        (snapshot) => {
-            // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
+        () => {},
         (error) => {
             console.log("Upload image error: ", error)
         },
@@ -48,9 +46,7 @@ export function addFilling(filling) {
     const fillingImgRef = ref(storage, `fillings/filling_img_${filling.id}`)
     const uploadTask = uploadBytesResumable(fillingImgRef, filling.imgUrl)
     uploadTask.on('state_changed',
-        (snapshot) => {
-            // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
+        () => {},
         (error) => {
             console.log("Upload image error: ", error)
         },
@@ -77,11 +73,11 @@ export const addCategory = async (category) => {
         title: category.title
     })
 }
-export const fetchProducts = async (lmt, categoryId = 0, order = ["id", "asc"]) => {
+export const fetchProducts = async (lmt, categoryId = 0) => {
 
     const q = categoryId === 0
-        ? query(collection(firestore, "products"), limit(lmt), orderBy(order[0], order[1]))
-        : query(collection(firestore, "products"), where("categoryId", "==", categoryId), limit(lmt), orderBy(order[0], order[1]))
+        ? query(collection(firestore, "products"), limit(lmt))
+        : query(collection(firestore, "products"), where("categoryId", "==", categoryId), limit(lmt))
 
 
     const querySnapshot = await getDocs(q);
@@ -143,9 +139,7 @@ export const updateProduct = async (product, prevProductUrl, dispatch) => {
         const uploadTask = uploadBytesResumable(productImgRef, product.imgUrl)
 
         uploadTask.on('state_changed',
-            (snapshot) => {
-                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            },
+            () => {},
             (error) => {
                 console.log("Upload image error: ", error)
             },
@@ -168,9 +162,7 @@ export const updateFilling = async (filling, prevFillingUrl, dispatch) => {
         const uploadTask = uploadBytesResumable(fillingImgRef, filling.imgUrl)
 
         uploadTask.on('state_changed',
-            (snapshot) => {
-                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            },
+            () => {},
             (error) => {
                 console.log("Upload image error: ", error)
             },

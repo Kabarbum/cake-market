@@ -6,17 +6,19 @@ import {
     fetchCategoriesAction,
     fetchProductsAction,
     setLastVisibleAction,
-    setProductPreLoadingAction
+    setProductPreLoadingAction, setProductsExistsAction
 } from "../store/reducers/products";
 import {fetchCategories, fetchProducts} from "../firebase/requests";
 
 const Catalog = () => {
     const dispatch = useDispatch()
     const limit = useSelector(state => state.products.limit)
+    const categoryId = useSelector(state => state.products.selectedCategoryId)
 
     const initProducts = async () => {
         dispatch(setProductPreLoadingAction(true))
-        const products = await fetchProducts(limit)
+        const products = await fetchProducts(limit, categoryId)
+        dispatch(setProductsExistsAction(true))
         dispatch(setLastVisibleAction(products[products.length - 1].id))
         dispatch(fetchProductsAction(products))
         dispatch(setProductPreLoadingAction(false))

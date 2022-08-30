@@ -30,9 +30,8 @@ const SET_CATEGORY_CHANGING = "SET_CATEGORY_CHANGING"
 
 const SET_AUTH = "SET_AUTH"
 
-
 const initialState = {
-    isAuth: false,
+    isAuth: true,
     login: process.env.REACT_APP_LOGIN,
     password: process.env.REACT_APP_PASSWORD,
     product: {
