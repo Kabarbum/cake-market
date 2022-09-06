@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {addFilling, updateFilling} from "../firebase/requests";
+import {addFilling, updateFilling} from "../../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setFillingPriceAction,
@@ -9,8 +9,8 @@ import {
     setFillingCompositionItemAction,
     removeFillingCompositionItemAction,
     addFillingCompositionItemAction, setFillingTitleAction
-} from "../store/reducers/admin";
-import cross from "../img/cross.png"
+} from "../../store/reducers/admin";
+import cross from "../../img/cross.png"
 
 const AdminProductsForm = () => {
     const dispatch = useDispatch()

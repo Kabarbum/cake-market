@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import AdminProductsForm from "./AdminProductsForm";
-import Loader from "./UI/Loader/Loader";
+import Loader from "../UI/Loader/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setProductsExistsAction
-} from "../store/reducers/products";
+} from "../../store/reducers/products";
 import AdminProductItem from "./AdminProductItem";
 import {
     setProductCategoryIdAction, setProductChangingAction,
@@ -12,8 +12,9 @@ import {
     setProductPriceAction,
     setProductTitleAction,
     setProductWeightAction, setPrevProductUrlAction
-} from "../store/reducers/admin";
-import {fetchMore, initProducts} from "../utils";
+} from "../../store/reducers/admin";
+import {initProducts} from "../../asnycAction/products";
+import {getMoreProducts} from "../../asnycAction/products";
 
 const AdminProducts = () => {
     const dispatch = useDispatch()
@@ -33,9 +34,9 @@ const AdminProducts = () => {
     useEffect(() => {
         if (isProductPreLoading) return
         if (observer.current) observer.current.disconnect()
-        const callback = async function (entries, observer) {
+        const callback = async function (entries) {
             if (entries[0].isIntersecting && !isProductLoading) {
-                await fetchMore(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists, dispatch)
+                dispatch(getMoreProducts(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists))
             }
         }
         observer.current = new IntersectionObserver(callback)
@@ -58,11 +59,7 @@ const AdminProducts = () => {
 
     useEffect(() => {
         dispatch(setProductsExistsAction(true))
-        async function fetchData() {
-            await initProducts(dispatch)
-        }
-        fetchData();
-
+        dispatch(initProducts())
     }, [])
 
     return (

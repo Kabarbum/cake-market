@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import FillingItem from "./FillingItem";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "./UI/Loader/Loader";
-import {initFillings} from "../utils";
+import {initFillings} from "../asnycAction/fillings";
 
 const FillingsList = () => {
     const dispatch = useDispatch()
@@ -11,10 +11,7 @@ const FillingsList = () => {
 
 
     useEffect(() => {
-        async function fetchData() {
-            await initFillings(dispatch)
-        }
-        fetchData();
+        dispatch(initFillings())
     }, [])
 
     return (

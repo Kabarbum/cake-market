@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AddProduct, updateProduct} from "../firebase/requests";
+import {AddProduct, updateProduct} from "../../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setProductAction,
@@ -8,7 +8,7 @@ import {
     setProductPriceAction,
     setProductTitleAction,
     setProductWeightAction
-} from "../store/reducers/admin";
+} from "../../store/reducers/admin";
 
 const AdminProductsForm = () => {
     const dispatch = useDispatch()

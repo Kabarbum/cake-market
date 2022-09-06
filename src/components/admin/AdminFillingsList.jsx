@@ -1,16 +1,16 @@
 import React, {useEffect} from 'react';
 import AdminFillingItem from "./AdminFillingItem";
 import {useDispatch, useSelector} from "react-redux";
-import Loader from "./UI/Loader/Loader";
-import {initFillings} from "../utils";
+import Loader from "../UI/Loader/Loader";
+import {initFillings} from "../../asnycAction/fillings";
 import {
     setFillingChangingAction,
     setFillingCompositionAction,
     setFillingIdAction, setFillingPriceAction,
     setFillingTitleAction,
     setFillingUrlAction, setPrevFillingUrlAction,
-} from "../store/reducers/admin";
-import {deleteFilling} from "../firebase/requests";
+} from "../../store/reducers/admin";
+import {deleteFilling} from "../../firebase/requests";
 
 const FillingsList = () => {
     const dispatch = useDispatch()
@@ -19,12 +19,9 @@ const FillingsList = () => {
 
 
     useEffect(() => {
-        async function fetchData() {
-            await initFillings(dispatch)
-        }
+        dispatch(initFillings())
+    }, [dispatch])
 
-        fetchData();
-    }, [])
     const setItem = (value) => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         dispatch(setFillingChangingAction(true))
@@ -44,14 +41,15 @@ const FillingsList = () => {
                 <Loader/>
                 :
                 <>
-                    {fillings.map(el => <AdminFillingItem
-                        key={el.id}
-                        value={el}
-                        setItem={setItem}
-                        deleteItem={deleteItem}
-                    />)}
+                    {fillings.map(el =>
+                        <AdminFillingItem
+                            key={el.id}
+                            value={el}
+                            setItem={setItem}
+                            deleteItem={deleteItem}
+                        />
+                    )}
                 </>
-
             }
         </div>
     );

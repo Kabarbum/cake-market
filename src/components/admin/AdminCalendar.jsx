@@ -1,11 +1,11 @@
 import React, {useMemo, useState} from 'react';
-import {addDate, deleteDate} from "../firebase/requests";
-import Calendar from "./Calendar";
+import {addDate, deleteDate} from "../../firebase/requests";
+import Calendar from "../Calendar";
 import {useSelector} from "react-redux";
 
 const AdminCalendar = () => {
     const [date, setDate] = useState("")
-    const [time, setTime] = useState(new Date())
+    const [time] = useState(new Date())
     const data = `${time.getFullYear()}-${time.getMonth() + 1 > 9 ? time.getMonth() + 1 : `0${time.getMonth() + 1}`}-${time.getDate()}`
     const dates = useSelector(state => state.calendar.dates).sort((a, b) => {
         let ai = a.date.split('.')
@@ -44,7 +44,7 @@ const AdminCalendar = () => {
                     <ul>
                         {dates.map(el =>
                             <li key={el.id}>{el.date}
-                                <div onClick={() => deleteHandler(el.id)} className="admin-calendar__delete-btn"></div>
+                                <div onClick={() => deleteHandler(el.id)} className="admin-calendar__delete-btn"/>
                             </li>)}
                     </ul>
                 </div>

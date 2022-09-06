@@ -5,9 +5,9 @@ import {
     setCategoryChangingAction,
     setCategoryIdAction,
     setCategoryTitleAction
-} from "../store/reducers/admin";
-import {addCategory, deleteCategory, fetchCategories, updateCategory} from "../firebase/requests";
-import {fetchCategoriesAction} from "../store/reducers/products";
+} from "../../store/reducers/admin";
+import {addCategory, deleteCategory, fetchCategories, updateCategory} from "../../firebase/requests";
+import {fetchCategoriesAction} from "../../store/reducers/products";
 
 const AdminFillings = () => {
     const dispatch = useDispatch()

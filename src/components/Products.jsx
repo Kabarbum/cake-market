@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ProductItem from "./ProductItem";
 import Loader from "./UI/Loader/Loader"
 import {useDispatch, useSelector} from "react-redux";
-import {fetchMore} from "../utils";
+import {getMoreProducts} from "../asnycAction/products";
 
 const Products = () => {
     const dispatch = useDispatch()
@@ -23,9 +23,9 @@ const Products = () => {
     useEffect(() => {
         if (isProductPreLoading) return
         if (observer.current) observer.current.disconnect()
-        const callback = async function (entries, observer) {
+        const callback = async function (entries) {
             if (entries[0].isIntersecting && !isProductLoading) {
-                await fetchMore(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists, dispatch)
+                dispatch(getMoreProducts(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists))
             }
         }
         observer.current = new IntersectionObserver(callback)

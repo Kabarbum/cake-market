@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {fetchDates} from "../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
 import {setCalendarDatesAction} from "../store/reducers/calendar";
-import {fetchCalendarDates} from "../utils";
+import {getCalendarDates} from "../utils";
 
 const Calendar = () => {
     const dispatch = useDispatch()
     const dates = useSelector(state => state.calendar.dates)
-    const [date1, setDate1] = useState(new Date())
+    const [date1] = useState(new Date())
     const [date2, setDate2] = useState(new Date())
     const [currentDate, setCurrentDate] = useState(0)
 
@@ -23,7 +23,7 @@ const Calendar = () => {
         setDate2(d)
 
     }, [currentDate])
-    const daysArr = fetchCalendarDates(dates, currentDate)
+    const daysArr = getCalendarDates(dates, currentDate)
     return (
         <div className="calendar__wrapper">
             <div className="calendar__header">
