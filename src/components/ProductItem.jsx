@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const ProductItem = ({product}) => {
-
+    const [isOpen, setIsOpen] = useState(false)
+    const openHandler = () => {
+        setIsOpen(true)
+    }
+    const closeHandler = () => {
+        setIsOpen(false)
+    }
     return (
         <div className="products-item">
-            <div className="products-item__img">
+            <div className={isOpen ? "products-item__img active" : "products-item__img"} onClick={openHandler}>
                 <img src={product.imgUrl} alt="img"/>
             </div>
+            <div className={isOpen ? "img--blur active" : "img--blur"} onClick={closeHandler}/>
             <div className="products-item__content">
                 <h3>{product.title}</h3>
                 <p>{product.description}</p>
