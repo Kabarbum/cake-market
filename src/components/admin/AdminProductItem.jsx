@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteProduct} from "../../firebase/requests";
+import {deleteProduct} from "../../firebase/requests/products";
 import {useSelector} from "react-redux";
 
 const ProductItem = ({product, setItem}) => {

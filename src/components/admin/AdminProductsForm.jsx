@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AddProduct, updateProduct} from "../../firebase/requests";
+import {AddProduct, updateProduct} from "../../firebase/requests/products";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setProductAction,

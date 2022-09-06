@@ -1,4 +1,4 @@
-import {fetchFillings } from "../firebase/requests";
+import {fetchFillings } from "../firebase/requests/fillings";
 import {fetchFillingsAction, setFillingsLoadingAction} from "../store/reducers/fillings";
 
 export const initFillings = () =>{

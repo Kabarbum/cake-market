@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {addFilling, updateFilling} from "../../firebase/requests";
+import {addFilling, updateFilling} from "../../firebase/requests/fillings";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setFillingPriceAction,

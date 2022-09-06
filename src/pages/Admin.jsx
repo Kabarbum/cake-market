@@ -4,7 +4,8 @@ import AdminFillings from "../components/admin/AdminFillings";
 import AdminCategories from "../components/admin/AdminCategories";
 import AdminCalendar from "../components/admin/AdminCalendar";
 import {useDispatch, useSelector} from "react-redux";
-import {initCategories, initProducts} from "../asnycAction/products";
+import {initCategories} from "../asnycAction/categories";
+import {initProducts} from "../asnycAction/products";
 
 const Admin = () => {
     const [page, setPage] = useState(0)

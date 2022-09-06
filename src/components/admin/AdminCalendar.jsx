@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {addDate, deleteDate} from "../../firebase/requests";
+import {addDate, deleteDate} from "../../firebase/requests/calendar";
 import Calendar from "../Calendar";
 import {useSelector} from "react-redux";
 

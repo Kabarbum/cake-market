@@ -1,11 +1,11 @@
 import {
-    fetchCategoriesAction, fetchMoreProductsAction,
+    fetchMoreProductsAction,
     fetchProductsAction,
     setLastVisibleAction, setProductLoadingAction,
     setProductPreLoadingAction,
     setProductsExistsAction
 } from "../store/reducers/products";
-import {fetchCategories, fetchMoreProducts, fetchProducts} from "../firebase/requests";
+import {fetchMoreProducts, fetchProducts} from "../firebase/requests/products";
 
 export const initProducts = (limit, categoryId) => {
     return async dispatch => {
@@ -35,12 +35,5 @@ export const getMoreProducts = (selectedCategoryId, selectedSort, limit, lastVis
         dispatch(setLastVisibleAction(products[products.length - 1].id))
         dispatch(fetchMoreProductsAction(products))
         dispatch(setProductLoadingAction(false))
-    }
-}
-export const initCategories = () => {
-    return async dispatch => {
-        let categories = await fetchCategories()
-        categories = categories.sort((a, b) => a.id - b.id)
-        dispatch(fetchCategoriesAction(categories))
     }
 }

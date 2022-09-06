@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import Categories from "../components/Categories";
 import Products from "../components/Products";
 import {useDispatch, useSelector} from "react-redux";
-import {initCategories, initProducts} from "../asnycAction/products";
+import {initProducts} from "../asnycAction/products";
+import {initCategories} from "../asnycAction/categories";
 
 const Catalog = () => {
     const dispatch = useDispatch()

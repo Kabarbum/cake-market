@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {fetchDates} from "../firebase/requests";
 import {useDispatch, useSelector} from "react-redux";
-import {setCalendarDatesAction} from "../store/reducers/calendar";
 import {getCalendarDates} from "../utils";
+import {getDates} from "../asnycAction/calendar";
 
 const Calendar = () => {
     const dispatch = useDispatch()
@@ -12,11 +11,7 @@ const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(0)
 
     useEffect(() => {
-        async function fetchData() {
-            const arr = await fetchDates();
-            dispatch(setCalendarDatesAction(arr))
-        }
-        fetchData();
+        dispatch(getDates())
 
         let d = new Date()
         d.setMonth(d.getMonth() + 1)

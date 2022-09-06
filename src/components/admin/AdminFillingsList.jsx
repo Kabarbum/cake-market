@@ -10,7 +10,7 @@ import {
     setFillingTitleAction,
     setFillingUrlAction, setPrevFillingUrlAction,
 } from "../../store/reducers/admin";
-import {deleteFilling} from "../../firebase/requests";
+import {deleteFilling} from "../../firebase/requests/fillings";
 
 const FillingsList = () => {
     const dispatch = useDispatch()

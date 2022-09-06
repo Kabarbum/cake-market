@@ -6,7 +6,7 @@ import {
     setCategoryIdAction,
     setCategoryTitleAction
 } from "../../store/reducers/admin";
-import {addCategory, deleteCategory, fetchCategories, updateCategory} from "../../firebase/requests";
+import {addCategory, deleteCategory, fetchCategories, updateCategory} from "../../firebase/requests/categories";
 import {fetchCategoriesAction} from "../../store/reducers/products";
 
 const AdminFillings = () => {

@@ -617,7 +617,7 @@ footer{
 .admin-header div:not(:last-child){
     margin-right: 10px;
 }
-/*admin add products*/
+/*admin add products.js*/
 .product-form{
     margin-bottom: 30px;
     display: flex;
