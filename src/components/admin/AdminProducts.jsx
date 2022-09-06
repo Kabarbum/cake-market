@@ -21,11 +21,6 @@ const AdminProducts = () => {
     const products = useSelector(state => state.products.products)
     const isProductLoading = useSelector(state => state.products.isProductLoading)
     const isProductPreLoading = useSelector(state => state.products.isProductPreLoading)
-    //for fetchMore
-    const selectedSort = useSelector(state => state.products.selectedSort)
-    const selectedCategoryId = useSelector(state => state.products.selectedCategoryId)
-    const limit = useSelector(state => state.products.limit)
-    const lastVisible = useSelector(state => state.products.lastVisible)
     const isProductsExists = useSelector(state => state.products.isProductsExists)
 
     const observer = React.useRef()
@@ -36,7 +31,7 @@ const AdminProducts = () => {
         if (observer.current) observer.current.disconnect()
         const callback = async function (entries) {
             if (entries[0].isIntersecting && !isProductLoading) {
-                dispatch(getMoreProducts(selectedCategoryId, selectedSort, limit, lastVisible, isProductsExists))
+                dispatch(getMoreProducts())
             }
         }
         observer.current = new IntersectionObserver(callback)

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     setCategoryAction
 } from "../store/reducers/products";
+import {useSearchParams} from "react-router-dom";
 
 function Categories() {
     const dispatch = useDispatch()
@@ -10,8 +11,11 @@ function Categories() {
 
     const selectedCategoryId = useSelector(state => state.products.selectedCategoryId)
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const setCategory = async (categoryId) => {
         dispatch(setCategoryAction(categoryId))
+        setSearchParams({'category': categoryId})
     }
 
     return (
