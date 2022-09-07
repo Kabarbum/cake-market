@@ -10,10 +10,11 @@ const ProductItem = ({product}) => {
     }
     return (
         <div className="products-item">
-            <div className={isOpen ? "products-item__img active" : "products-item__img"} onClick={openHandler}>
+            <div className="products-item__img" onClick={openHandler}>
                 <img src={product.imgUrl} alt="img"/>
             </div>
-            <div className={isOpen ? "img--blur active" : "img--blur"} onClick={closeHandler}/>
+            <img className={isOpen ? "img--blur active" : "img--blur"} src={product.imgUrl} alt="img"/>
+            <div className={isOpen ? "img-bg--blur active" : "img-bg--blur"} onClick={closeHandler}/>
             <div className="products-item__content">
                 <h3>{product.title}</h3>
                 <p>{product.description}</p>
