@@ -31,9 +31,9 @@ const SET_CATEGORY_CHANGING = "SET_CATEGORY_CHANGING"
 const SET_AUTH = "SET_AUTH"
 
 const initialState = {
-    isAuth: true,
-    login: process.env.REACT_APP_LOGIN,
-    password: process.env.REACT_APP_PASSWORD,
+    isAuth: false,
+    login: "AIzaSyAmWvQWD2taK2VdkKbY627CuLNoS0_CHgU",
+    password: "cake-market-859d1",
     product: {
         id: uuidv4(),
         title: "",

@@ -1,21 +1,26 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setAuth} from "../store/reducers/admin";
 import {useNavigate} from "react-router-dom"
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const Auth = () => {
     const dispatch = useDispatch()
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
-    const lgn = useSelector(state => state.admin.login)
-    const psw = useSelector(state => state.admin.password)
-    const authHandler = () => {
-        if (login === lgn && password === psw) {
-            dispatch(setAuth(true))
-            navigate("/admin");
-        } else
-            alert("Уходи вон отсюда, паршивка вонючая^_^")
+    const authHandler = async () => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, login, password)
+            .then(() => {
+                dispatch(setAuth(true))
+                navigate("/admin");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage)
+                alert("Уходи вон отсюда, паршивка вонючая^_^")
+            });
     }
     return (
         <main>
