@@ -32,8 +32,6 @@ const SET_AUTH = "SET_AUTH"
 
 const initialState = {
     isAuth: false,
-    login: "AIzaSyAmWvQWD2taK2VdkKbY627CuLNoS0_CHgU",
-    password: "cake-market-859d1",
     product: {
         id: uuidv4(),
         title: "",
