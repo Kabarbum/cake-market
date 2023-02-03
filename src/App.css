@@ -191,7 +191,6 @@ footer{
 /* CONTACTS */
 
 .contacts{
-    width: 600px;
     max-width: 100%;
     margin: 0 auto 10px;
     color: var(--white);
@@ -202,23 +201,61 @@ footer{
 }
 .contacts h3{
   margin: 0;
-  font-size: 36px;
+  font-size: 32px;
 }
 .contacts p{
   margin: 0;
-  font-size: 18px;
+  font-size: 1.2rem;
 }
 .contacts-socials{
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+    width: 400px;
+    margin: 30px auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    transform: rotate(-4deg);
+    border: 1px solid #E7BF3A;
 }
-.contacts a:nth-child(2){
-  margin-left:25px;
-  margin-right:25px;
+@media (max-width: 768px) {
+    .contacts-socials{
+        width: 300px;
+    }
+    .contacts-socials a{
+        font-size: 1.5rem;
+    }
+    .contacts .venchik{
+        display: none;
+    }
 }
-.contacts img{
+.contacts-socials ul{
+    width: 300px;
+    list-style-type: none;
+}
+.contacts-socials a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #dedede;
+    font-size: 2rem;
+}
+.contacts-socials li:not(:last-child){
+    margin-bottom: 8px;
+}
+.contacts ul img{
   width: 48px;
+    margin-right: 10px;
+}
+.contacts .venchik{
+    width: 100px;
+    height: auto;
+}
+.contacts .venchik img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.contacts iframe{
+    margin-top: 10px;
 }
 /*CATALOG*/
 .categories{

@@ -10,7 +10,7 @@ const FillingItem = ({value}) => {
             <div className="fillings__item-content">
                 <div className="fillings__item-content__top">
                     <h3>{value.title}</h3>
-                    <span>{value.price} руб/кг</span>
+                    <span>{value.price}&nbsp;руб <span style={{whiteSpace:'nowrap'}}>/</span>кг</span>
                 </div>
                 <ul className="fillings__item-property">
                     {value.composition.map((el, idx) =>

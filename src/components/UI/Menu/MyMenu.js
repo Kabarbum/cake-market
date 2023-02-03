@@ -14,7 +14,7 @@ const MyMenu = ({isMenuVisible, setMenuVisible}) => {
             <ul>
                 <li><Link to="">Каталог</Link></li>
                 <li><Link to="/fillings">Начинки</Link></li>
-                <li><Link to="/order">Как Заказать</Link></li>
+                <li><Link to="/order">Контакты</Link></li>
                 {isAuth && <li><Link to="/admin">Админка</Link></li>}
 
 

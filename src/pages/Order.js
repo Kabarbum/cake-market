@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Inst from "../img/contact-inst.png";
 import VK from "../img/contact-vk.png";
 import WhatsUp from "../img/contact-whatsapp.png";
-import Calendar from "../components/Calendar";
-import activeBg from "../img/active-bg.png"
-import brushBg from "../img/cross-bg.png"
+import venchik from "../img/venchik.png"
+import Loader from "../components/UI/Loader/Loader";
 const Order = () => {
+    const [isLoading, setIsLoading] = useState(0)
     return (
         <div className="order-page">
             <div className="contacts">
@@ -13,34 +13,48 @@ const Order = () => {
 
                     <div className="contacts-body">
                     <span>
-                        <h3>Контакты</h3>
-                        <p>Отвечаю в инстаграмме в течение 24 часов.</p>
-                        <p>О доставке либо самовывозе договариваемся по факту заказа.</p>
+                        <h3>С радостью отвечу тебе в соц.&nbsp;сетях</h3>
+                        <p>Отвечаю в инстаграме в течение суток</p>
                     </span>
                         <div className="contacts-socials">
-                            <a href="https://www.instagram.com/e.a.cherem/">
-                                <img src={Inst} alt="Inst"/></a>
-                            <a href="https://vk.com/karamel_zlat">
-                                <img src={VK} alt="Vk"/></a>
-                            <a href="https://api.whatsapp.com/send/?phone=79026017967">
-                                <img src={WhatsUp} alt="WhatsUp"/></a>
-                        </div>
-                        <div className="calendar-description__list">
-                            <div className="calendar-description__list-item">
-                                <div className="calendar-description__img"><img src={activeBg} alt="cake"/></div>
-                                <span> - Свободный день для заказа</span>
+                            <ul>
+                                <li>
+                                    <a href="https://www.instagram.com/e.a.cherem/">
+                                        <img src={Inst} alt="Inst"/>
+                                        <span>e.a.cherem</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://vk.com/vkysnotort_spb">
+                                        <img src={VK} alt="Vk"/>
+                                        <span>vkysnotort_spb</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://api.whatsapp.com/send/?phone=79823662301">
+                                        <img src={WhatsUp} alt="WhatsUp"/>
+                                        <span>+7 (982) 366-23-01</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div className="venchik">
+                                <img src={venchik} alt="venchik"/>
                             </div>
-                            <div className="calendar-description__list-item">
-                                <div className="calendar-description__img"><img src={brushBg} alt="cross"/></div>
-                                <span> - Дата занята</span>
-                            </div>
                         </div>
+                        {
+                            isLoading===0 && <Loader/>
+                        }
+                            <iframe
+                                onLoad={() => setIsLoading("100%")}
+                                title={"yaMap"}
+                                src="https://yandex.ru/map-widget/v1/?um=constructor%3A4c7cf2a2eb882a94ca8831cfe4ba079f6e52fe6f27f665f3035498373849af9b&amp;source=constructor"
+                                width={isLoading} height="450" frameBorder="0"/>
                     </div>
 
                 </div>
             </div>
 
-            <Calendar/>
 
         </div>
     );

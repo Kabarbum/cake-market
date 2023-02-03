@@ -33,7 +33,7 @@ const Navbar = () => {
                         <NavLink to="/fillings">Начинки</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink to="/order"><nobr>Как заказать</nobr></NavLink>
+                        <NavLink to="/order"><nobr>Контакты</nobr></NavLink>
                     </li>
                     {isAuth &&
                         <li className="nav-item">
