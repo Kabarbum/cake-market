@@ -25,7 +25,7 @@ const ProductItem = ({product, setItem}) => {
                     <span>Вес: {product.weight} кг.</span>
                     <span>Цена: {product.price} руб.</span>
                 </div>
-                <p>{categories[product.categoryId]?.title}</p>
+                <p>{categories[product.categoryId].title}</p>
                 <div className="products-item__btn" onClick={changeHandle}>изменить</div>
                 <div className="products-item__btn" onClick={deleteHandle}>удалить</div>
             </div>

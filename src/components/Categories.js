@@ -11,7 +11,7 @@ function Categories() {
 
     const selectedCategoryId = useSelector(state => state.products.selectedCategoryId)
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [, setSearchParams] = useSearchParams();
 
     const setCategory = async (categoryId) => {
         dispatch(setCategoryAction(categoryId))

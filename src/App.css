@@ -1,14 +1,14 @@
 @font-face {
   font-family: "chalk";
-  src: url("../fonts/chalk.ttf") format("truetype");
+  src: url("assets/fonts/chalk.ttf") format("truetype");
 }
 @font-face {
   font-family: "tall";
-  src: url("../fonts/tall.otf") format("truetype");
+  src: url("assets/fonts/tall.otf") format("truetype");
 }
 @font-face {
   font-family: "whicyr";
-  src: url("../fonts/whicyr.otf") format("truetype");
+  src: url("assets/fonts/whicyr.otf") format("truetype");
 }
 :root{
     --orange: #E7BF3A;
@@ -161,7 +161,7 @@ nav ul a:hover,nav ul a.active {
   padding: 0;
 }
 .socials a:not(:last-child){
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .socials a img{
   object-fit: cover;
@@ -359,7 +359,7 @@ footer{
     justify-content: space-evenly;
 }
 .products-item{
-    width: 300px;
+    width: 320px;
     color: #111;
     display: flex;
     flex-direction: column;
@@ -368,24 +368,17 @@ footer{
     background-color: rgba(100,100,100,0.3);
     border-radius: 4px;
 }
-.products-item:hover{
-    box-shadow: -5px -5px 5px -1px rgba(170, 170, 170, 0.24) inset;
-    transition: .2s;
-}
 .products-item__img{
-    height: 300px;
+    height: 340px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     display: inline-block;
     overflow: hidden;
 }
-.products-item__img.active{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(2);
-    border-radius: 10px;
-    z-index: 12;
+.products-item__img:hover{
+    transition: .2s;
+    filter: brightness(70%);
+    cursor:zoom-in;
 }
 .img--blur{
     display: none;
@@ -423,9 +416,6 @@ footer{
     object-fit: cover;
     transition: .6s;
     display: block;
-}
-.products-item__img img:hover{
-    transform: scale(1.2);
 }
 .products-item__content{
     padding: 8px;

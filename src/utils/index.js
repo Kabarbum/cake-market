@@ -1,3 +1,4 @@
+import React from 'react'
 const checkDate = (dates, value) => {
     let check = false
     dates.forEach(el => {

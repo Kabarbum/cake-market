@@ -1,3 +1,4 @@
+import React from 'react'
 import Catalog from "../pages/Catalog";
 import Order from "../pages/Order";
 import Admin from "../pages/Admin";
